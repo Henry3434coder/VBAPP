@@ -1,1 +1,7 @@
+These are the buttons for inserting data.
+
+<button type="button" data-task-id="#PLAYER_ID#"
+class="t-Button t-Button--hot cc-delete-btn">INSYSPASS</button>
+
+<button type="button" data-pask-id="#PLAYER_ID#" class="t-Button t-Button--hot t-Button--danger cc-outsys-btn">OUTSYSPASS</button>
 
