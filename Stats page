@@ -29,12 +29,16 @@ JOIN
 
 
 #The next most important thing to do is to create a page item. 
-#This will be a hidden page item and its purpose is to store the ID of the row, in order to insert data.
+#This will be a hidden page item and its purpose is to store the ID of the row, in order to insert data. Mine is called P1_TASK_TO_DELETE.
 
 #The next important step is to create buttons for inserting data. You will need to create plan text columns with HTML expresssions for the buttons.
 #both buttons have a data task id, and a cc. 
 #The task id allow the button to grab the ID of the player for the specific row and the cc if for storing the function of the button.
 #cc for the first is delete because it came from a test ignore it.
+
+#she explains the button process for a report very well vvvvvv
+#https://www.youtube.com/watch?v=dIEcPYAI9qI&pp=ygUhYnV0dG9uIGZvciBldmVyeSByb3cgYXBlY3ggb3JhY2xl
+
 
 #button one insystem passes
 <button type="button" data-task-id="#PLAYER_ID#"
@@ -49,6 +53,72 @@ class="t-Button t-Button--hot t-Button--danger cc-outsys-btn">OUTSYSPASS</button
 #both buttons have functions that allow them to work I will go through that now.
 
 #starting with Insystem passes.
-# go to dy
+# go to dynamic actions (lightning bolt)
+Step 1. Create a new "Click" dynamic action.
+#this first action is allowing the button to connect to a action
+#chose jQuery selector and add the cc from the button EX mine is .cc-delete-btn
+
+step 2. create the first true action for the button.
+#the action is executing javascript code 
+
+let taskidtodelete = $(this.triggeringElement).data('taskId');
+console.log(taskidtodelete)
+
+apex.items.P1_TASK_TO_DELETE.setValue(taskidtodelete);
+
+#this combines the data task id in our button and our hidden page item to allow our button to get 
+the id of its row.
+
+step 2. sql code for the button
+this action is executing server side PL/SQL code
+
+BEGIN
+  UPDATE passing_stats
+  SET in_system_passes = in_system_passes + 1
+  WHERE player_id = to_number(:P1_TASK_TO_DELETE);
+end;
+
+#very important under the code where it says items to subit but the name of your hidden item we first
+created.
+
+#this is allow the query to get the id of the player without you coding anything it does it for you automatically.
+
+#last thing is a refresh action. everytime you hit the button to ener data the page refreshes and you see the data in your report.
+
+#OUTSYSPASS button- same steps so just code
+1.click dynamic action
+2.jquery selector .cc-outsys-btn
+
+3.under true-
+  java script code
+  let OUTOFSYS = $(this.triggeringElement).data('paskId');
+  console.log(OUTOFSYS)
+ apex.items.P1_TASK_TO_DELETE.setValue(OUTOFSY
+
+4. under true- exe server side code
+BEGIN
+  UPDATE passing_stats
+  SET out_of_system_passes = out_of_system_passes + 1
+  WHERE player_id = to_number(:P1_TASK_TO_DELETE);
+end;
+
+items to submit = P1_TASK_TO_DELETE (hidden item)
+
+5. refresh item
+
+#last but not least a button the clears the report from all passing data.
+#button is called reset and its defined by dynamic action.
+
+UPDATE passing_stats
+set in_system_passes = 0,
+out_of_system_passes = 0;
+
+sets all stats to 0
+
+then a page refresh action to show reset.
+
+
+
+
 
 
