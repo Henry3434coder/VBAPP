@@ -1,0 +1,24 @@
+This is a simple report that uses a query to show data.
+
+page type = classic report
+
+main funtion is to get all data into one place then allow table to be printed to pdf.
+
+SELECT
+    p.PLAYER_ID,
+    p.NAME,
+    p.POSITION,
+    ps.IN_SYSTEM_PASSES,
+    ps.OUT_OF_SYSTEM_PASSES,
+    CASE WHEN (ps.IN_SYSTEM_PASSES + ps.OUT_OF_SYSTEM_PASSES) = 0 THEN NULL
+        ELSE ROUND((ps.IN_SYSTEM_PASSES / (ps.IN_SYSTEM_PASSES + ps.OUT_OF_SYSTEM_PASSES)) * 100, 2)
+    END AS PERCENT_GOOD,
+    CASE WHEN (ps.IN_SYSTEM_PASSES + ps.OUT_OF_SYSTEM_PASSES) = 0 THEN NULL
+        ELSE ROUND((ps.OUT_OF_SYSTEM_PASSES / (ps.IN_SYSTEM_PASSES + ps.OUT_OF_SYSTEM_PASSES)) * 100, 2)
+    END AS PERCENT_BAD
+FROM
+    PLAYER p
+JOIN
+    PASSING_STATS ps ON p.PLAYER_ID = ps.PLAYER_ID;
+
+#case part of query necessary to avoid error from null value. 
