@@ -1,7 +1,54 @@
-These are the buttons for inserting data.
+#The passing stats page is a classic report page.
+#sql query for this report page is:
 
+ SELECT
+    p.PLAYER_ID,
+    p.NAME,
+    p.POSITION,
+    p.CLASS,
+    p.JERSEY_NUMBER,
+    ps.IN_SYSTEM_PASSES,
+    ps.OUT_OF_SYSTEM_PASSES,
+    CASE WHEN (ps.IN_SYSTEM_PASSES + ps.OUT_OF_SYSTEM_PASSES) = 0 THEN NULL
+        ELSE ROUND((ps.IN_SYSTEM_PASSES / (ps.IN_SYSTEM_PASSES + ps.OUT_OF_SYSTEM_PASSES)) * 100, 2)
+    END AS PERCENT_GOOD,
+    CASE WHEN (ps.IN_SYSTEM_PASSES + ps.OUT_OF_SYSTEM_PASSES) = 0 THEN NULL
+        ELSE ROUND((ps.OUT_OF_SYSTEM_PASSES / (ps.IN_SYSTEM_PASSES + ps.OUT_OF_SYSTEM_PASSES)) * 100, 2)
+    END AS PERCENT_BAD
+FROM
+    PLAYER p
+JOIN
+    PASSING_STATS ps ON p.PLAYER_ID = ps.PLAYER_ID;
+
+#joins the two tables based on playerID.
+#Withouth the Case part of the query Apex will through an error because of the null value in the passing column. 
+#EX before any data is entered for a player it will be 0.
+
+#2 other columns are created in the query. percent good and percent bad.
+#these jsut exist in the query and are not stored in a table. The numbers will be produced from the pdf export.
+
+
+#The next most important thing to do is to create a page item. 
+#This will be a hidden page item and its purpose is to store the ID of the row, in order to insert data.
+
+#The next important step is to create buttons for inserting data. You will need to create plan text columns with HTML expresssions for the buttons.
+#both buttons have a data task id, and a cc. 
+#The task id allow the button to grab the ID of the player for the specific row and the cc if for storing the function of the button.
+#cc for the first is delete because it came from a test ignore it.
+
+#button one insystem passes
 <button type="button" data-task-id="#PLAYER_ID#"
 class="t-Button t-Button--hot cc-delete-btn">INSYSPASS</button>
 
-<button type="button" data-pask-id="#PLAYER_ID#" class="t-Button t-Button--hot t-Button--danger cc-outsys-btn">OUTSYSPASS</button>
+
+#button 2 outsystem passes
+<button type="button" data-pask-id="#PLAYER_ID#" 
+class="t-Button t-Button--hot t-Button--danger cc-outsys-btn">OUTSYSPASS</button>
+
+
+#both buttons have functions that allow them to work I will go through that now.
+
+#starting with Insystem passes.
+# go to dy
+
 
