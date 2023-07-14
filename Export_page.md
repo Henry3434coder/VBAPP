@@ -1,7 +1,11 @@
+
+# SQL query for this report page is:
+
 # The passing stats page is a classic report page.
 # SQL query for this report page is:
 
-# Query: Player Passing Stats Report
+```sql
+-- Query: Player Passing Stats Report
 SELECT
     p.PLAYER_ID,
     p.NAME,
