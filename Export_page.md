@@ -1,11 +1,12 @@
-
-# SQL query for this report page is:
-
 # The passing stats page is a classic report page.
 # SQL query for this report page is:
 
 ```sql
 -- Query: Player Passing Stats Report
+-- Purpose: This query retrieves player passing statistics for generating a report.
+-- The report includes the player's ID, name, position, in-system passes, out-of-system passes,
+-- and the percentage of good and bad passes based on the total number of passes.
+
 SELECT
     p.PLAYER_ID,
     p.NAME,
