@@ -25,3 +25,6 @@ FROM
     PLAYER p
 JOIN
     PASSING_STATS ps ON p.PLAYER_ID = ps.PLAYER_ID;
+
+
+You have to enable printing for the report.
