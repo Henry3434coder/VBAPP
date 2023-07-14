@@ -1,8 +1,7 @@
-This is a simple report that uses a query to show data.
-
-page type = classic report
-
-main funtion is to get all data into one place then allow table to be printed to pdf.
+-- Query: Player Passing Stats Report
+-- Purpose: This query retrieves player passing statistics for generating a report.
+-- The report includes the player's ID, name, position, in-system passes, out-of-system passes,
+-- and the percentage of good and bad passes based on the total number of passes.
 
 SELECT
     p.PLAYER_ID,
@@ -20,5 +19,3 @@ FROM
     PLAYER p
 JOIN
     PASSING_STATS ps ON p.PLAYER_ID = ps.PLAYER_ID;
-
-#case part of query necessary to avoid error from null value. 
