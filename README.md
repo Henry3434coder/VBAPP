@@ -1,6 +1,6 @@
 # Apex App - Player Passing Stats Tracker
 
-The Apex App - Player Passing Stats Tracker is a web application designed to track and manage the passing statistics of players in a team. It provides a user-friendly interface for recording and monitoring player passing data, allowing coaches and team managers to effectively analyze player performance and make data-driven decisions.
+The Apex App - this volleyball stats tracker is a web application designed to track and manage the passing statistics of players in a team. It provides a user-friendly interface for recording and monitoring player passing data, allowing coaches and team managers to effectively analyze player performance and make data-driven decisions.
 
 ## Purpose
 
