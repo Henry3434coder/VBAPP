@@ -4,7 +4,8 @@
 ```sql
 ## Query: Player Passing Stats Report
 ## Purpose: This query retrieves player passing statistics for generating a report.
-## The report includes the player's ID, name, position, in-system passes, out-of-system passes, and the percentage of good and bad passes based on the total number of passes.
+## The report includes the player's ID, name, position, in-system passes, out-of-system passes,
+and the percentage of good and bad passes based on the total number of passes.
 
 SELECT
     p.PLAYER_ID,
